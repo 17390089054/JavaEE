@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="GBK">
+		<meta name="keywords" content="智能,五子棋">
+		<meta name="description" content="Alfago智能五子棋">
+		<title>JAVA开发智能五子棋</title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			h1{
+				display:block;
+				margin-top:20px;
+				text-align:center;
+				font-size:40px;
+				color:#45cdcd;
+			}
+			body{
+				background:url(img/bg.jpg) no-repeat;
+				background-size:100% 100%;
+			}
+			canvas{
+				background:#fff;
+				margin:100px auto;
+				display:block;
+				box-shadow:0px 0px 10px #000;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>JAVA开发智能五子棋系统-WRF</h1>
+		<!--canvas start-->
+		<canvas height="450" width="450" id="canvas">
+			对不起您的浏览器不支持canvas 请更换高版本浏览器！
+		</canvas>
+		<!--canvas end-->
+		<!---script--->
+		<script type="text/javascript">
+			var over=false;var chess=document.getElementById("canvas");var context=chess.getContext("2d");var drawBoard=function(){context.strokeStyle="#bbbbbb";for(var i=0;i<15;i++){context.moveTo(15+i*30,15);context.lineTo(15+i*30,435);context.moveTo(15,15+i*30);context.lineTo(435,15+i*30);context.stroke()}};drawBoard();var onStep=function(i,j,me){context.beginPath();context.arc(15+i*30,15+j*30,10,0,Math.PI*2);context.closePath();context.stroke();var gredient=context.createRadialGradient(15+i*30+2,15+j*30-2,10,15+i*30+2,15+j*30-2,0);if(me){gredient.addColorStop(0,"#0a0a0a");gredient.addColorStop(1,"#636767")}else{gredient.addColorStop(0,"#d1d1d1");gredient.addColorStop(1,"#f9f9f9")}context.fillStyle=gredient;context.fill()};var me=true;var chessBoard=[];for(var i=0;i<15;i++){chessBoard[i]=[];for(var j=0;j<15;j++){chessBoard[i][j]=0}}chess.onclick=function(e){if(over){return}if(!me){return}var x=e.offsetX;var y=e.offsetY;var i=Math.floor(x/30);var j=Math.floor(y/30);if(chessBoard[i][j]==0){onStep(i,j,me);chessBoard[i][j]=1;for(var k=0;k<count;k++){if(wins[i][j][k]){myWin[k]++;computerWin[k]=6;if(myWin[k]==5){window.alert("恭喜你,你赢了");over=true}}}if(!over){me=!me;computerAI()}}};var wins=[];for(var i=0;i<15;i++){wins[i]=[];for(var j=0;j<15;j++){wins[i][j]=[]}}var count=0;for(var i=0;i<15;i++){for(var j=0;j<11;j++){for(var k=0;k<5;k++){wins[i][j+k][count]=true}count++}}for(var i=0;i<15;i++){for(var j=0;j<11;j++){for(var k=0;k<5;k++){wins[j+k][i][count]=true}count++}}for(var i=0;i<11;i++){for(var j=0;j<11;j++){for(var k=0;k<5;k++){wins[i+k][j+k][count]=true}count++}}for(var i=0;i<11;i++){for(var j=14;j>3;j--){for(var k=0;k<5;k++){wins[i+k][j-k][count]=true}count++}}var myWin=[];var computerWin=[];for(var i=0;i<count;i++){myWin[i]=0;computerWin[i]=0}var computerAI=function(){var myScore=[];var computerScore=[];var max=0;var u=0,v=0;for(var i=0;i<15;i++){myScore[i]=[];computerScore[i]=[];for(var j=0;j<15;j++){myScore[i][j]=0;computerScore[i][j]=0}}for(var i=0;i<15;i++){for(var j=0;j<15;j++){if(chessBoard[i][j]==0){for(var k=0;k<count;k++){if(wins[i][j][k]){if(myWin[k]==1){myScore[i][j]+=200}else{if(myWin[k]==2){myScore[i][j]+=400}else{if(myWin[k]==3){myScore[i][j]+=2000}else{if(myWin[k]==4){myScore[i][j]+=10000}}}}if(computerWin[k]==1){computerScore[i][j]+=420}else{if(computerWin[k]==2){computerScore[i][j]+=820}else{if(computerWin[k]==3){computerScore[i][j]+=4100}else{if(computerWin[k]==4){computerScore[i][j]+=20000}}}}}}if(myScore[i][j]>max){max=myScore[i][j];u=i;v=j}else{if(myScore[i][j]==max){if(computerScore[i][j]>computerScore[u][v]){u=i;v=j}}}if(computerScore[i][j]>max){max=computerScore[i][j];u=i;v=j}else{if(computerScore[i][j]==max){if(myScore[i][j]>myScore[u][v]){u=i;v=j}}}}}}onStep(u,v,false);chessBoard[u][v]=2;for(var k=0;k<count;k++){if(wins[u][v][k]){computerWin[k]++;myWin[k]=6;if(computerWin[k]==5){window.alert("很遗憾,计算机赢了!");over=true}}}if(!over){me=!me}};
+
+
+
+
+
+		</script>
+	</body>
+</html>

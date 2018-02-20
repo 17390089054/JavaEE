@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Java开发云音乐播放系统</title>
+		<meta name="keywords" content="云音乐,播放">
+		<meta name="description" content="云音乐播放系统">
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			/*start music*/
+			.music{
+					width:900px;
+					height:600px;
+					margin:120px auto;		
+			}
+			/*music left*/
+			.music .m-left{
+				width:650px;
+				height:520px;
+				float:left;
+				background:url(img/timg.gif);
+				background-size:100% 100%;
+			}
+			/* m-right start*/
+			.music .m-right{
+				width:250px;
+				height:520px;
+				background:#808080;
+				float:right;
+			}
+			.music .m-right ul{
+				list-style:none;
+				width:120px;
+				height:180px;
+				margin:15px auto;
+				text-align:center;
+				line-height:30px;
+			}
+			.music .m-right ul img
+			{
+				border-radius:50%;
+				box-shadow:0px 0px 10px #fff;/*水平方向 垂直方向 模糊度 背景色*/
+			}
+			.music .m-right ul li:nth-child(2){
+				font-size:14px;
+				font-weight:700;
+				border-bottom:2px solid #fff;
+				color:#fff;
+			}
+			/*歌词*/
+			.music .m-right .Text
+			{
+				height:300px;
+				width:100%;
+				text-align:center;
+				color:white;
+				line-height:30px;
+				overflow:auto;
+				
+
+			}
+			/*滚动条*/
+			.Text::-webkit-scrollbar{width:5px;background:#ccc;}
+			.Text::-webkit-scrollbar-button{background:#e5e5e5;}
+			.Text::-webkit-scrollbar-thumb{background:#999;}
+
+			/*m-right end*/
+			/*控制条*/
+			.music .m-footer{
+					width:100%;
+					height:80px;
+					background:#c0c0c0;
+					float:left;
+			}
+			.music .m-footer img
+			{
+				width:75px;
+				height:75px;
+				margin-top:3px;
+				margin-left:100px;
+				cursor:pointer;
+				border-radius:50%;
+			}
+
+
+
+			/*end music*/
+			.color{
+				color:orange;
+				font-size:18px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!--start music-->
+		<div class="music">
+		<!--左边区域-->
+			<div class="m-left">
+				<textarea style="width:700px;height:400px;display:none" id="lrc" >
+					[ti:]
+					[ar:]
+					[al:]
+					[by:]
+					[00:01.02]动物世界
+					[00:01.89]
+					[00:02.71]作词:薛之谦  
+					[00:03.67]作曲:郭顶
+					[00:04.54]演唱:薛之谦  
+					[00:05.34]<br>
+					[00:11.06]东打一下西戳一下
+					[00:13.67]动物未必需要尖牙
+					[00:16.04]示爱的方法有礼貌或是我管它 
+					[00:21.47]要将情人一口吞下      
+					[00:23.88]还要显得温文尔雅
+					[00:26.59]螳螂委屈的展示旧伤疤
+					[00:31.16]<br>
+					[00:31.61]求偶时候一惊一乍
+					[00:34.33]因为害怕时常倒挂
+					[00:36.83]走投无路的情况下舍弃了尾巴
+					[00:42.14]如果不能将它同化就寄生于它 大不了一同腐化         
+					[00:50.94]<br>
+					[00:51.20]努力进化 笑动物世界都太假        
+					[00:57.16]祖先 已磨去爪牙             
+					[01:01.36]相爱相杀 一定有更好的办法
+					[01:07.41]攀比一下 谁先跪下
+					[01:11.36]<br>
+					[01:11.84]不再进化 动物世界里都太傻   
+					[01:17.92]为情表现到浮夸
+					[01:22.99]得到了你就该丢下 人性来不及粉刷 
+					[01:27.99]所以啊 人总患孤寡
+					[01:32.40]<br>
+					[01:54.75]麋鹿本来约在树下
+					[01:57.14]说好一起浪迹天涯
+					[01:59.70]系上铃铛还在往那个方向挣扎 
+					[02:04.92]如果有只豺狼它英勇披上婚纱 同伴笑他读过童话
+					[02:14.02]<br>
+					[02:23.05]别再进化 别让动物世界太假   
+					[02:28.96]我们 该露出爪牙
+					[02:32.96]相爱相杀 别再想更好的办法
+					[02:38.96]优胜劣汰 自舔伤疤    
+					[02:42.89] <br>      
+					[02:43.16]假装进化 拼命想和动物有差  
+					[02:48.75]玩一出高贵优雅
+					[02:54.13]在人们腐烂的欲望下 兽性来不及抹杀
+					[02:58.56]算了吧 懒得去挣扎 
+					[03:04.60]<br>
+					[03:04.88]人类用沙 想捏出梦里通天塔
+					[03:10.28]为贪念不惜代价 
+					[03:15.78]驾驭着昂贵的木马 巢穴一层层叠加  
+					[03:20.16]最后啊 却一丝不挂    别害怕 我们都孤寡
+					[03:33.80]<br>
+					[03:34.19]制作人：郭顶
+					[03:34.39]编曲/钢琴/贝斯：陈迪
+					[03:34.58]鼓：王斌
+					[03:34.76]弦乐：国际首席爱乐乐团
+					[03:34.96]第一小提琴：李朋 王大毛庞阔 张浩 杨爽 李曦 刘潇 高言 杨思宇 倪冰雪
+					[03:35.15]第二小提琴：简蓓 阎红 张晨迪 唐昕 侯宇红 张雷 徐文超
+					[03:35.32]中提琴：何辉 毕芳 武文豪 陈欣欣 王羽沛
+					[03:35.50]大提琴：张平 郎莹 陈俊杰 孙艺 邵鑫
+					[03:35.88]低音提琴：周旭 段然
+					[03:36.05]录音：汝文博 （Big J Studio. beijing.)
+					[03:36.25]混音：赵靖（Big J Studio. beijing.）
+					[03:36.48]母带：Tom Coyne （Sterlingsound NYC.）
+					[03:36.69]<br>
+
+
+
+				
+				</textarea>
+			</div>
+		<!--右边区域-->
+			<div class="m-right">
+				<ul>
+					<li><img src="img/author.jpg" height="120px" width="120px" alt="用户图片"></li>
+					<li>《动物世界》</li>
+				</ul>
+				<!--歌词显示-->
+				<div class="Text">
+					
+				</div>
+			</div>
+			<!--控制条-->
+			<div class="m-footer">
+				<img src="img/last.jpg" id="last" />
+				<img src="img/play.jpg" id="play" />
+				<img src="img/next.jpg" id="next" />		
+			</div>
+			<audio src="music/薛之谦 - 动物世界.mp3" id="music" loop></audio>
+		</div>
+		<!--end music-->
+		
+		
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+				//var lrc=document.getElementById("lrc").value;
+				//获取歌词
+				var lrc=$("#lrc").val();
+				var text="";
+				//切割歌词
+				var arr=lrc.split("[");
+				for(var i=0;i<arr.length;i++)
+				{
+					var timer=arr[i].split("]");//再次切割
+					console.log(timer);
+					var date=timer[0].split(".");
+					//console.log(date);
+					var stime=date[0].split(":");
+					//console.log(stime);
+					var ms=stime[0]*60+stime[1]*1;//获取秒数
+					//console.log(ms);
+					//将歌词添加到容器中
+					var message=timer[1];
+					if(message){
+						text+="<p id='"+ms+"'>"+message+"</p>";
+					}
+					$(".Text").html(text);
+				}
+
+				var flag=true;
+			//点击按钮播放或暂停
+			$("#play").click(function(){
+				
+				if(flag)
+				{
+					$("#music").get(0).play();
+					$(this).attr("src","img/pause.jpg");
+					$(this).attr("id","pause");
+					flag=false;
+				}else
+				{
+					$("#music").get(0).pause();
+					$(this).attr("src","img/play.jpg");
+					$(this).attr("id","play");
+					flag=true;
+				}
+								
+			})
+			//歌词联动
+			//timeupdate 事件在音频/视频（audio/video）的播放位置发生改变时触发。
+			$("#music").get(0).addEventListener("timeupdate",function(){
+				//获取当前播放时间
+				var ms=this.currentTime+0.6;
+				console.log(ms);
+				//console.log(this.currentTime);
+				//通过时间驱动歌词
+				var time1=parseInt(ms);
+				for(var i=0;i<time1;i++){
+					//歌词联动
+					$("#"+i).addClass("color").siblings().removeClass("color");
+					$(".Text").scrollTop(($(".color").index()-10)*30);
+				}
+				
+				
+			})			
+			
+
+		</script>
+	</body>
+</html>

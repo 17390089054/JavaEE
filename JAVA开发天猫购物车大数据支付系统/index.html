@@ -1,0 +1,781 @@
+<!doctype html>
+<html>
+	<head>
+		<!--导航栏 设置页面的基本属性-->
+		<!--中文编码:GBK GB2312   国际编码:UTF-8 -->
+		<meta http-equiv="Content-type"  content="text/html;charset=GBK" >
+		<!--页面三要素: title keywords description-->
+		<title>JAVA开发天猫购物车大数据支付系统</title><!--最多31字-->
+		<meta name="keywords" content="天猫,购物,网购">
+		<meta name="description" content="天猫购物网致力于为用户提供优质的网购服务,集购物,销售,运输于一体的第三方网购平台"><!--80字以内 国际化标准:76字以内-->
+		<style>
+			/*start top*/
+			*{margin:0px;padding:0px;}
+
+			.top {
+			width:100%;
+			height:150px;
+			/*border:2px solid #ff00cc;*/
+			/*background-color:#ff66ff;*/
+			}
+			.top .logo
+			{
+				width:300px;
+				margin:25px 10px 0px 40px;
+				height:150px;
+				/*background-color:#cc9999;*/
+			}
+			.top .logo img
+			{
+				margin:10px 5px;
+				
+			}
+			.top .logo img:hover
+			{
+				border:3px solid #ff6699;
+			}
+			.top .title
+			{
+				float:right;
+				margin:-83px 100px 0px 0px;
+			}
+			.top .title span
+			{
+				font-size:28px;
+				color:#c2bcc5;
+			}
+			/*end top*/
+
+			/*start header*/
+			.header
+			{
+				width:100%;
+				height:120px;
+					
+			}
+			.header .banner
+			{
+				width:99%;
+				height:100px;
+				margin:auto	 auto;
+				/*background-color:#ff6699;*/	
+			}
+		/*end header*/
+		/*start shop*/
+			.shop
+			{
+				width:96%;
+				height:600px;
+				margin:auto;
+				
+			}
+
+			.shop ul
+			{
+				list-style:none;
+			}
+			.shop ul li
+			{
+				border:1px solid #e4e4e4;
+				padding:20px;
+				width:220px ;
+				height:400px;
+				float:left;
+			}
+			 .shop ul li .goods
+			{
+			
+			}
+			.shop ul li .goods img
+			{
+				
+				
+				
+			}
+			.shop ul li .goods img:hover
+			{	
+				border:3px solid #ff3366;
+			}
+			.shop ul li .detail
+			{
+				
+				width:220px;
+				padding:5px;
+			}
+			.shop ul li .detail h3 a
+			{
+			
+			color:#000000;
+			text-decoration:none;
+			}
+			.shop ul li .detail p
+			{
+				
+				color:#8c8c8c;
+				font-size:14px;
+			}
+			.shop ul li .info
+			{
+				border:1px solid #e5e5e5;
+				
+				padding:10px;
+				height:30px;
+				width:200px;
+			}
+			.shop ul li .info .price span
+			{
+				margin:15px auto;
+			}
+			.shop ul li .info .sale
+			{
+				line-height:30px;
+				float:right;
+				color:#aaaaaa;
+			}
+			
+			.shop ul li  .btn-add
+			{
+				cursor:pointer;
+				margin:8px auto;
+				height:50px;
+				width:220px;
+				background-color:#ff3333;
+				color:#fff;
+				font-size:17px;
+				border-radius:10px;
+			}
+		/*shop end*/
+		/*start car*/
+		.car 
+		{
+			width:260px;
+			height:100%;
+			float:right;
+			position:fixed;
+			background:#e9e9e9;
+			top:0px;
+			right:0px;
+			
+		}
+		.car .c-tools
+		{
+			width:35px;
+			height:100%;
+			background-color:#000;
+
+		}
+		.car .c-tools 
+		{
+			background-color:#000;
+			padding-top:300px;
+			float:left;
+		}
+		.car .c-tools a
+		{
+			text-decoration:none;
+			display:block;
+			color:#fff;
+		}
+		.car .c-tools a:hover
+		{
+			background-color:#ff6600;
+		}
+		.car .c-tools .c-icon
+		{
+			width:35px;height:35px;display:block;background:url("img/car.ico");
+			
+		}
+		.car .c-tools .c-text
+		{
+			display:block;width:18px;height:100%;font-size:20px;margin:5px auto;color:#fff;padding:5px;
+		}
+		.car .c-list 
+		{
+			width:225px;
+			height:100%;
+			float:right;
+		}
+		.car .c-list ul 
+		{
+			list-style:none;
+			padding:5px;
+			position:relative;
+		}
+		.car .c-list ul li .goods a
+		{
+			text-decoration:none;
+			color:#993333;
+			
+		}
+		.car .c-list ul li
+		{
+			margin:10px auto;
+			position:relative;
+		}
+
+		.car .c-list ul li .goods
+		{
+			background-color:#f7f7f7;
+		}
+		.car .c-list ul li:hover
+		{
+			border:2px solid red;	
+		}
+		#name
+		{
+			color:#996666;
+			position:absolute;
+			font-size:18px;
+			top:5px;
+
+		}
+		#price
+		{
+			color:red;
+			font-size:18px;
+			margin-bottom:5px;
+		}
+
+		.total
+		{
+			display:block;
+			width:100%;
+			height:40px;
+			background-color:#ff3300;
+			text-decoration:none;
+			color:#fff;
+			font-size:18px;
+			text-align:center;
+			line-height:40px;
+			position:absolute;
+			bottom:5px;
+			left:35px;
+		}
+		/*end  car*/
+		.fly
+		{
+			border-radius:50px;
+		}
+		</style>
+	</head>
+	<body>
+	<!--start top-->
+		<div class="top">
+			
+			<div class="logo">
+				<img src="img/tmall.gif" width="290px" height="130px" alt="天猫">
+			</div>
+
+			<div class="title">
+				<span>天猫购物车支付系统</span>
+			</div>
+		</div>
+	<!--end top-->
+		
+	<!--start header-->
+		<div class="header">
+			<div class="banner">
+				<img src="img/header.jpg" width="100%" height="100%" alt="header.jpg" >
+			</div>
+		</div>
+	<!--end header-->
+		<!--start shop-->
+		<div class="shop">
+			<ul>
+				<li>
+					<div class="goods">
+					<a href="http://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.15.23b31708JIH7pk&id=545896335041&skuId=3489105903708&user_id=2838892713&cat_id=2&is_b=1&rn=8d97cdccf5d2047b1d540f9e2c4d1c44">
+						<img src="img/1.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="http://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.15.23b31708JIH7pk&id=545896335041&skuId=3489105903708&user_id=2838892713&cat_id=2&is_b=1&rn=8d97cdccf5d2047b1d540f9e2c4d1c44">华为P10</a>
+						</h3>
+						<p>
+							19日10点首发，预约新品赢好礼
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i>
+						<span>3299</span>
+						</span>
+						<div class="sale">
+							<span>已售:9479</span>
+						</div>
+
+					</div>
+						<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.2.873bd9D4KhxR&id=558509313522&user_id=1917047079&cat_id=2&is_b=1&rn=11d9e1c516eee1f0b0f498dfcd718e72&sku_properties=10004:709990523">
+						<img src="img/2.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.2.873bd9D4KhxR&id=558509313522&user_id=1917047079&cat_id=2&is_b=1&rn=11d9e1c516eee1f0b0f498dfcd718e72&sku_properties=10004:709990523"> Apple iPhone 8 Plus</a>
+						</h3>
+						<p>
+							新品首发 手慢无货
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>7988</span>
+						</span>
+						<div class="sale">
+							<span>已售:28945</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.8.873bd9D4KhxR&id=538473991555&skuId=3217960944457&user_id=2616970884&cat_id=2&is_b=1&rn=11d9e1c516eee1f0b0f498dfcd718e72">
+						<img src="img/3.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.8.873bd9D4KhxR&id=538473991555&skuId=3217960944457&user_id=2616970884&cat_id=2&is_b=1&rn=11d9e1c516eee1f0b0f498dfcd718e72">Apple iphone 7</a>
+						</h3>
+						<p>
+							原封国行 提前加入购物车
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>4088</span>
+						</span>
+						<div class="sale">
+							<span>已售:16000</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.16.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=558197055865&scm=1003.4.lb-zebra-164656-978614.ITEM_558197055865_2269880&sku_properties=5919063:6536025;122216431:27772">
+						<img src="img/16.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.16.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=558197055865&scm=1003.4.lb-zebra-164656-978614.ITEM_558197055865_2269880&sku_properties=5919063:6536025;122216431:27772">vivo X20梦幻粉</a>
+						</h3>
+						<p>
+							渐变色彩工艺 新品上市
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>3198</span>
+						</span>
+						<div class="sale">
+							<span>已售:22713</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.9.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=557156077822&scm=1003.4.lb-zebra-164656-989393.ITEM_557156077822_858946&sku_properties=10004:900640275;5919063:6536025">
+						<img src="img/5.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.9.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=557156077822&scm=1003.4.lb-zebra-164656-989393.ITEM_557156077822_858946&sku_properties=10004:900640275;5919063:6536025">魅蓝Note6全网通公开版</a>
+						</h3>
+						<p>
+							赠EP21耳机（除16G和3+32G）
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>999</span>
+						</span>
+						<div class="sale">
+							<span>已售:27906</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.11.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=558540134751&scm=1003.4.lb-zebra-164656-989393.ITEM_558540134751_858946&sku_properties=10004:827902415;5919063:6536025">
+						<img src="img/6.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.11.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=558540134751&scm=1003.4.lb-zebra-164656-989393.ITEM_558540134751_858946&sku_properties=10004:827902415;5919063:6536025">魅蓝6全网通公开版</a>
+						</h3>
+						<p>
+							800万前置美颜
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>699</span>
+						</span>
+						<div class="sale">
+							<span>已售:10946</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.13.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=555850828895&scm=1003.4.lb-zebra-164656-989393.ITEM_555850828895_858946&sku_properties=10004:827902415;5919063:6536025">
+						<img src="img/7.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.13.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=555850828895&scm=1003.4.lb-zebra-164656-989393.ITEM_555850828895_858946&sku_properties=10004:827902415;5919063:6536025">魅蓝PRO 7全网通公开版</a>
+						</h3>
+						<p>
+							低配赠129元耳机 高配赠199元...
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>1999</span>
+						</span>
+						<div class="sale">
+							<span>已售:5526</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.15.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=536632569909&scm=1003.4.lb-zebra-164656-989393.ITEM_536632569909_858946&sku_properties=10004:653780895;5919063:6536025;12304035:116177">
+						<img src="img/8.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4645741896.15.50564f9bC85oEj&acm=lb-zebra-164656-989393.1003.4.858946&id=536632569909&scm=1003.4.lb-zebra-164656-989393.ITEM_536632569909_858946&sku_properties=10004:653780895;5919063:6536025;12304035:116177">魅蓝E全网通公开版</a>
+						</h3>
+						<p>
+							到手699元 立即购买
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>799</span>
+						</span>
+						<div class="sale">
+							<span>已售:3790</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.2.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=563484952650&scm=1003.4.lb-zebra-164656-978614.ITEM_563484952650_2269880&sku_properties=10004:827902415;5919063:6536025">
+						<img src="img/9.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.2.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=563484952650&scm=1003.4.lb-zebra-164656-978614.ITEM_563484952650_2269880&sku_properties=10004:827902415;5919063:6536025">魅蓝S6全面屏手机</a>
+						</h3>
+						<p>
+							19日10点首发，预约新品赢好礼
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>999</span>
+						</span>
+						<div class="sale">
+							<span>已售:10041</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.4.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=550400906956&scm=1003.4.lb-zebra-164656-978614.ITEM_550400906956_2269880&sku_properties=5919063:6536025;12304035:3222911;122216431:27772">
+						<img src="img/10.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.4.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=550400906956&scm=1003.4.lb-zebra-164656-978614.ITEM_550400906956_2269880&sku_properties=5919063:6536025;12304035:3222911;122216431:27772">三星S8勃艮第红</a>
+						</h3>
+						<p>
+							19号开启99元抢定，享6重好礼
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>4999</span>
+						</span>
+						<div class="sale">
+							<span>已售:613</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.6.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=560538155798&scm=1003.4.lb-zebra-164656-978614.ITEM_560538155798_2269880&sku_properties=5919063:6536025;122216431:27772">
+						<img src="img/11.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.6.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=560538155798&scm=1003.4.lb-zebra-164656-978614.ITEM_560538155798_2269880&sku_properties=5919063:6536025;122216431:27772">OPPO R11s星幕新年版</a>
+						</h3>
+						<p>
+							赠新年定制礼盒
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>3199</span>
+						</span>
+						<div class="sale">
+							<span>已售:8147</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8864518.5141988793.3.10aec674l8YoP0&acm=lb-zebra-245003-2120413.1003.4.1854975&id=562979700931&scm=1003.4.lb-zebra-245003-2120413.OTHER_14957607226761_1854975&sku_properties=1627207:28341;5919063:6536025;122216431:27772">
+						<img src="img/12.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8864518.5141988793.3.10aec674l8YoP0&acm=lb-zebra-245003-2120413.1003.4.1854975&id=562979700931&scm=1003.4.lb-zebra-245003-2120413.OTHER_14957607226761_1854975&sku_properties=1627207:28341;5919063:6536025;122216431:27772">全新Nokia/诺基亚 6</a>
+						</h3>
+						<p>
+							1月10日10:06正式开售
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>1499</span>
+						</span>
+						<div class="sale">
+							<span>已售:3401</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.10.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=562798601815&scm=1003.4.lb-zebra-164656-978614.ITEM_562798601815_2269880&sku_properties=10004:385316259;5919063:6536025;12304035:1687525009">
+						<img src="img/13.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.10.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=562798601815&scm=1003.4.lb-zebra-164656-978614.ITEM_562798601815_2269880&sku_properties=10004:385316259;5919063:6536025;12304035:1687525009">华为畅享7S</a>
+						</h3>
+						<p>
+							新品上市 买赠好礼
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>1499</span></span>
+						<div class="sale">
+							<span>已售:12756</span>
+						</div>
+
+					</div>
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+				</li>
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.12.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=562948989464&scm=1003.4.lb-zebra-164656-978614.ITEM_562948989464_2269880&sku_properties=10004:653780895;5919063:6536025">
+						<img src="img/14.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.12.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=562948989464&scm=1003.4.lb-zebra-164656-978614.ITEM_562948989464_2269880&sku_properties=10004:653780895;5919063:6536025">荣耀9青春版</a>
+						</h3>
+						<p>
+							千元四摄 拍出美丽
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>1119</span>
+						</span>
+						<div class="sale">
+							<span>已售:43116</span>
+						</div>
+
+					</div>
+				
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+					
+				</li>
+
+				<li>
+					<div class="goods">
+					<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.14.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=563382155465&scm=1003.4.lb-zebra-164656-978614.ITEM_563382155465_2269880&sku_properties=5919063:6536025;12304035:697918458;122216431:27772">
+						<img src="img/1.jpg" width="220px" height="220px" alt="智能手机"/>
+					</a>
+					</div>
+					<div class="detail">
+						<h3>
+							<a href="https://detail.tmall.com/item.htm?spm=a222t.8063993.4954155005.14.50564f9bC85oEj&acm=lb-zebra-164656-978614.1003.4.2269880&id=563382155465&scm=1003.4.lb-zebra-164656-978614.ITEM_563382155465_2269880&sku_properties=5919063:6536025;12304035:697918458;122216431:27772">OPPO A83 新品</a>
+						</h3>
+						<p>
+							29号震撼登场 大屏大内存手机
+						</p>
+					</div>
+					<div class="info">
+						<span class="price">
+						<i>￥</i><span>1399</span>
+						</span></span>
+						<div class="sale">
+							<span>已售:5620</span>
+						</div>
+
+					</div>
+					
+					<button class="btn-add" type="button">加 入 购 物 车 </button>
+					
+				</li>
+
+			</ul>
+		</div>
+	<!--end shop-->
+	
+	<!--start car-->
+	
+		<div class="car">
+			<div class="c-tools">
+					<a href="#" id="hide" vs="true">
+						<i class="c-icon"></i>
+						<span class="c-text">购物车</span>
+					</a>
+			</div>
+			<div class="c-list"> 
+				<ul>
+					
+				</ul>
+				<a href="#" class="total"> 结 算  &gt;&gt;</a>
+			</div>
+			
+		</div>	
+		<!--end car-->
+
+		<!---script--->
+			<script type="text/javascript" src="js/jquery.min.js"></script>
+			<script type="text/javascript" src="js/jquery.fly.js"></script>
+			<script>
+				$(".btn-add").on("click",function(e)
+				{
+					var price=$(this).parent().find(".price span").text();
+					var name=$(this).parent().find("h3 a").html();
+					var img=$(this).parent().find(".goods a img").attr("src");
+					var url=$(this).parent().find(".goods a").attr("href");
+					console.log(url);
+					$(".car .c-list ul").append('<li>'+
+						'<div class="goods">'+
+						'<a href="'+url+'">'+
+							'<img src="'+img+'" width="70px" height="70px" alt="商品图片">'+
+							'<span id="name">'+name+'</span>'+
+							'<span id="price">'+price+'</span></span>'+
+						'</a>'+
+						'</div>'+
+					'</li>');
+					addGoods(e);
+				});
+			//抛物线添加
+			function addGoods(e)
+			{
+				//设置落脚点
+				var offset=$(".c-icon").offset();
+				//获取当前点击的js对象
+				var src=$(e.target).parent().find(" img").attr("src");
+				var flyer=$("<img width='80'px height='80'px alt='缩略图' src='"+src+"' class='fly'/> ");
+				flyer.fly({
+					start:{
+						left:e.pageX,
+						top:e.pageY
+					},
+					end:{
+						left:offset.left+10,
+						top:offset.top+10,
+						width:0,
+						height:0
+						},
+						onEnd:function()
+						{
+							flyer.fadeOut("slow",function()
+							{
+								$(this).remove();
+							});
+						}
+
+					});
+				
+			}
+			//点击购物车隐藏购物车
+			$("#hide").click(function()
+			{
+				
+				var status=$(".car .c-tools a").attr("vs");
+
+				var flag=status=="true"?true:false;
+				console.log(typeof(flag));
+				console.log(flag);
+			
+				
+				if(flag)
+				{
+					
+					$(".c-list").fadeOut(100,function()
+					{
+						$(".car").css("width","35px");
+						$(".car .c-tools a").attr("vs","false");
+										
+					});
+					
+				}
+				else
+				{	
+					$(".car").css("width","260px");
+					$(".c-list").fadeIn(100,function()
+					{
+						$(".car .c-tools a").attr("vs","true");
+					});					
+				}
+				
+				
+			});
+
+			</script>
+		<!---script---->
+	</body>
+	
+
+</html>

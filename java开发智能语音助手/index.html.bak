@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="GBK">
+		<title>人工智能语音小助手</title>
+		<meta name="keywords" content="人工智能 语音对话">
+		<meta name="description" content="人工智能实现语音助手">
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			html,body{
+				height:100%;
+				width:100%;		
+			}
+			/*header begin*/
+			.header
+			{
+				width:100%;
+				height:60px;
+				background-color:#669933;
+				font-size:30px;
+				text-align:center;
+				color:#fff;
+				line-height:60px;
+			}
+			/*header end*/
+			/*c-body begin*/
+			.c-body
+			{
+				width:800px;
+				height:600px;			
+				margin:15px auto;
+			}
+			.title
+			{
+			width:805px;
+			height:80px;
+			background-color:#39db82;
+			padding:5px auto;
+			}
+			.title img
+			{
+				margin:5px  10px;
+				float:left;
+			}
+			.title span
+			{
+				font-size:30px;
+				
+				color:#fff;
+				margin-top:25px;
+				float:left;
+			}
+
+			.box
+			{
+				width:760px;
+				height:520px;			
+				background-color:#efefef;
+				padding:20px;
+				border:2px solid red;
+			}
+
+			.box .chat
+			{
+				width:760px;
+				height:450px;
+				background-color:#6633cc;
+				
+			}
+			.box .footer
+			{
+				width:760px;
+				height:120px;
+				
+			}
+			.box .footer input
+			{
+				height:50px;
+				border-radius:5px;
+				outline:none;
+				border:none;
+				font-size:18px;
+				margin-top:20px;
+			}
+			#text
+			{
+			
+				width:640px;				
+				text-indent:20px;
+				float:left;
+				
+			}
+			#btn
+			{
+				width:100px;
+				background-color:#669999;
+				color:white;
+				font-size:18px;
+				cursor:pointer;
+				float:right;
+			}
+
+			/*c-body end*/
+		</style>
+	</head>
+	<body>
+		<!--header begin-->
+		<div class="header">
+			<b>JAVA开发人工智能语音机器人系统</b>
+		</div>
+		<!--header end-->
+
+		<!--c-body begin-->
+		<div class="c-body">
+			<div class="title">		
+					<img src="resource/img/logo.png" width="83px" height="65px" alt="图标"/>	
+					<span>人工智能机器人</span>
+			</div>
+			<div class="box">
+				<div class="chat">
+					
+				</div>
+				<div class="footer">
+					<input type="text" id="text" />
+					<input type="button" id="btn" value=" 发 送 " />
+				</div>
+			</div>
+
+		</div>
+		<!--c-body end-->
+		<!-- script -->
+		<script type="text/javascript" src="resource/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+			$("#btn").on("click",function(){
+			//获取text文本的值
+			var text=$("#text").val();
+			//利用ajax与后台进行数据交互
+			$.ajax({
+					type:"GET",
+					url:"robot",
+					data:text,
+					success:function()
+					{
+						
+						
+					}
+				});
+			});	
+		
+		</script>
+		
+		<!-- script -->
+	</body>
+</html>

@@ -1,0 +1,227 @@
+<html>
+	<head>
+		<meta charset="GBK"><!--编码集 GB2312 GBK-->
+		<meta name="keywords" content="3D,城市,模型"/><!--字数:38-68-->
+		<meta name="description" content="3D城市模型构建"/>
+		<title>3D城市模型</title>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			html,body
+			{
+				height:100%;
+				width:100%;
+				perspective:700px;
+				/*景深*/
+				background:url(img/timg.jpg);
+				background-size:100% 100%;
+			}
+			
+			
+			#City
+			{
+				background:#7c7c7c;
+				position:absolute;
+				margin:auto;
+				top:0px;
+				left:0px;
+				right:0px;
+				bottom:0px;
+				border-radius:10px;
+				border:10px solid #666633;
+				animation:rotateEstate 10s linear infinite;
+				
+			}
+			div,b,i
+			{
+				position:absolute;transform-style:preserve-3d;
+			}
+			#City div b
+			{			
+				height:100%;
+				background:rgba(176,208,233,0.9);
+				transform:rotateX(90deg);
+				transform-origin:0 0;
+				
+			}
+			#City div b>b
+			{
+				background:rgba(176,208,233,0.9);
+				transform:rotateY(90deg);
+				transform-origin:0 0;
+			}
+
+			#City div b>b>b
+			{
+				background:rgba(176,208,233,0.9);
+				transform:rotateY(90deg);
+				transform-origin:100% 0;
+				right:1px;
+			}
+			#City div b>b>b>b
+			{
+				background:rgba(176,208,233,0.9);
+				transform:rotateY(90deg);
+				transform-origin:0 100%;
+				left:0px;
+			}
+			#City div b>b>b>b>i
+			{
+				background:#a0a0a0;
+				opacity:0.9;
+				transform:rotateX(-90deg); 
+				transform-origin:0 100%;
+				bottom:0px;
+			}
+			#City div.a b
+			{
+				background:url("img/1.jpg");
+			}
+			#City div.b b
+			{
+				background:url("img/4.jpg");
+			}
+			#City div.c b
+			{
+				background:url("img/5.jpg");
+			}
+			#City div.d b
+			{
+				background:url("img/6.jpg");
+			}
+			#City div.e b
+			{
+				background:url("img/7.jpg");
+			}
+			#City div.f b
+			{
+				background:url("img/9.jpg");
+			}
+
+			@keyframes rotateEstate{
+			from{transform:rotateX(60deg) rotateZ(-180deg);}
+			to{transform:rotateX(60deg) rotateZ(180deg);}
+
+			}
+
+		</style>
+	</head>
+	<body>
+		<!--
+		<div id="City">		
+			<div class="a" style="height:150px;top:0;left:0">
+				<b style="width:30px;">
+					<b style="width:20px">
+						<b style="width:30px">
+							<b style="width:20px">
+								<i style="width:20px;height:30px"></i>
+							</b>
+						</b>
+					</b>
+				</b>
+			</div>
+		</div>
+		-->
+	</body>
+	<script type="text/javascript">
+	//生成城市的方法
+	function City(base)
+	{
+		this.base=base;//横向纵向基数
+		this.max=50;
+
+	}
+	//生成基底
+	City.prototype.Area=function(parent)
+	{
+			this.city=document.createElement("div");
+			this.city.id="City";
+			this.city.style.height=this.city.style.width=this.base*this.max+"px";
+			parent.appendChild(this.city);
+	}
+	//生成楼层并添加到父容器中
+	City.prototype.Estate=function(top,left)
+	{
+		var estate=document.createElement("div");
+		estate.className=this.GetStyle();
+		estate.style.height=this.GetHeight()+"px";
+		estate.style.top=top+"px";
+		estate.style.left=left+"px";
+		this.city.appendChild(estate);
+		var l=this.GetWidth();
+		var w=this.GetWidth();
+		var b1=document.createElement("b");
+		b1.style.width=l+"px";
+		estate.appendChild(b1);
+
+		var b2=document.createElement("b");
+		b2.style.width=w+"px";
+		b1.appendChild(b2);
+
+		var b3=document.createElement("b");
+		b3.style.width=l+"px";
+		b2.appendChild(b3);
+
+		var b4=document.createElement("b");
+		b4.style.width=w+"px";
+		b3.appendChild(b4);
+		
+		var i=document.createElement("i");
+		i.style.width=w+"px";
+		i.style.height=l+"px";
+		b4.appendChild(i);
+
+
+
+	}
+	//随机生成样式
+	City.prototype.STYLE=["a","b","c","d","e","f"];
+	City.prototype.GetStyle=function()
+	{
+		return this.STYLE[(Math.random()*100<<2)%5];
+	}
+
+
+
+	//随机楼的高度 20-150
+	City.prototype.GetHeight=function()
+	{
+		return (Math.random()*1000<<2)%130+20;
+
+	}
+	//随机楼的宽度 20-40
+	City.prototype.GetWidth=function()
+	{
+		return (Math.random()*1000<<2)%20+20;
+
+	}
+
+
+
+	City.prototype.build=function(parent)
+	{
+		//生成基底
+		this.Area(parent);
+		
+		//创建楼
+		for(var i=0;i<this.base;i++)
+		{
+			for(var j=0;j<this.base;j++)
+			{
+				this.Estate(i*this.max+10,j*this.max+10);
+			}
+		}
+		
+	}
+	
+
+	
+	new City(8).build(document.body);
+	
+	
+	</script>
+</html>
+
+
